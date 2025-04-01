@@ -1,9 +1,13 @@
-  #carousel-section {
-    margin-top:20px !important;
-  }
+
   .container {
     direction: rtl;
   }
+.my-5 {
+    margin-top: 5rem !important;
+    /* margin-bottom: 3rem !important; */
+}
+
+
   /* تأثير عند التمرير على الصورة */
   .customer-image {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
