@@ -25,9 +25,18 @@
 
   } */
    body {
-    padding: 5% !important;
-   }
+    background: linear-gradient(to top, #ffffff, #d3ffde);
 
+    /* padding: 5% !important; */
+   }
+.bg-light-edit {
+    background: linear-gradient(to top, #f0fff0, #d4edda);
+
+}
+.bg-dark-edit {
+    background: linear-gradient(to top, #FFFFFF, #000);
+
+}
    .container-page.my-5 {
     margin-bottom: 0 !important;
    }
