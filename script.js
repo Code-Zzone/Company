@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // زر تغيير الوضع الليلي والنهاري
 document.getElementById("toggleTheme").addEventListener("click", function() {
-    document.body.classList.toggle("bg-dark");
-    document.body.classList.toggle("text-light");
+    document.body.classList.toggle("bg-dark-edit");
+    document.body.classList.toggle("bg-light-edit");
     this.textContent = document.body.classList.contains("bg-dark") ? "🌞 الوضع النهاري" : "🌙 الوضع الليلي";
 });
 
