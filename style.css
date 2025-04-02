@@ -1,34 +1,10 @@
-/*   
-  
-  .container.my-5 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    row-gap: 50px !important;
-    direction: rtl;
-  } */
-  /* .contact-us.py-5.text-light,
-  .customer-reviews.py-5.text-light {
-    width: 100%;
-  }
-  .new-edit-slider {
-    box-sizing: content-box !important;
-    
-}
-
-  header {
-    margin-bottom: 20px !important;
-  }
-  .main-page {
-   width: 100% !important;
-
-  } */
-   body {
+/* body start */
+  body {
     background: linear-gradient(to top, #ffffff, #d3ffde);
-
-    /* padding: 5% !important; */
    }
+   /* body end */
+
+/* dark and light mod  start */
 .bg-light-edit {
     background: linear-gradient(to top, #f0fff0, #d4edda);
 
@@ -37,6 +13,8 @@
     background: linear-gradient(to top, #FFFFFF, #000);
 
 }
+/* dark and light mod  end */
+
    .container-page.my-5 {
     margin-bottom: 0 !important;
    }
@@ -144,15 +122,7 @@ form {
     text-align: center;
     padding: 10px;
 }
- /* زر الصعود والنزول */
- /* .scroll-buttons {
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 1000;
-} */
+
 
 .scroll-buttons button {
     position: fixed;
@@ -184,9 +154,13 @@ form {
     color: #218838 !important;
 }
 
-
-/* .carousel-control-next , 
-.carousel-control-prev {
-    background-color: #00000053 !important;
-    width: 3% !important;
-} */
+/* how to order start */
+.how-to-order .container .row div ,
+.why-us .container .row div {
+    margin-top: 10px !important;
+}
+.contact-us .container .row {
+    row-gap: 10px;
+    /* flex-direction: column-reverse; */
+}
+/* how to order end */
