@@ -29,3 +29,12 @@ document.getElementById("toggleTheme").addEventListener("click", function() {
     document.body.classList.toggle("text-light");
     this.textContent = document.body.classList.contains("bg-dark") ? "🌞 الوضع النهاري" : "🌙 الوضع الليلي";
 });
+
+// ازرار السكرول
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function scrollToBottom() {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
