@@ -1,12 +1,50 @@
-
-  .container {
+/*   
+  
+  .container.my-5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 50px !important;
     direction: rtl;
+  } */
+  /* .contact-us.py-5.text-light,
+  .customer-reviews.py-5.text-light {
+    width: 100%;
   }
-.new-edit {
-    margin-top: 5rem !important;
-    /* margin-bottom: 3rem !important; */
+  .new-edit-slider {
+    box-sizing: content-box !important;
+    
 }
 
+  header {
+    margin-bottom: 20px !important;
+  }
+  .main-page {
+   width: 100% !important;
+
+  } */
+   body {
+    padding: 5% !important;
+   }
+
+   .container-page.my-5 {
+    margin-bottom: 0 !important;
+   }
+
+   section {
+    background-color: transparent !important;
+   }
+   .d-flex.justify-content-between.mt-4 {
+    flex-wrap: wrap ;
+    row-gap: 5px;
+   }
+.accordion-button.text-success {
+    border-radius: 14px !important;
+}
+.my-5.new-edit-slider {
+    margin: 0 !important;
+}
 
   /* تأثير عند التمرير على الصورة */
   .customer-image {
@@ -91,11 +129,55 @@ form {
 .btn-success:hover {
     background-color: #218838;
 }
-/* footer section start  */
 
 .cerator-footer {
     width: 100%;
     text-align: center;
-    padding: 0 10px;
+    padding: 10px;
 }
-/* footer section end  */
+ /* زر الصعود والنزول */
+ /* .scroll-buttons {
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+} */
+
+.scroll-buttons button {
+    position: fixed;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-buttons button:hover {
+    background-color: #218838;
+}
+.down {
+    left: 20px ;
+}
+.up {
+    right: 20px;
+}
+
+
+.customer-reviews.py-5.text-light ,
+.customer-reviews.py-5.text-light .container h3,
+.about-us.py-5.text-light  {
+    color: #218838 !important;
+}
+
+
+/* .carousel-control-next , 
+.carousel-control-prev {
+    background-color: #00000053 !important;
+    width: 3% !important;
+} */
