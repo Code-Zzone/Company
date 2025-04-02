@@ -63,6 +63,7 @@
                     <a href="#" class="text-success me-3"><i class="bi bi-facebook fs-4"></i></a>
                     <a href="#" class="text-success me-3"><i class="bi bi-twitter fs-4"></i></a>
                     <a href="#" class="text-success me-3"><i class="bi bi-instagram fs-4"></i></a>
+                    <a href="#" class="text-success me-3 fs-4"><i class="bi bi-whatsapp"></i></a>   
                 </div>
 
                 <!-- زر تغيير الوضع -->
@@ -71,11 +72,10 @@
         </div>
     </nav>
 </header>
-
     <!-- المحتوى الرئيسي -->
-    <main class="container my-5">
+    <main class="container-page my-5">
         <!-- Slider section start -->
-<section id="carousel-section" class="my-5 new-edit">
+<section id="carousel-section" class="my-5 new-edit-slider" >
     <!-- تعريف السلايدر باستخدام Bootstrap Carousel -->
     <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
         <!-- العناصر داخل السلايدر (الصور) -->
@@ -129,7 +129,7 @@
         <!-- Slider section end -->
 
 <!-- بداية قسم المنتجات -->
-<section id="products-section" class="py-5 bg-dark text-light">
+<section id="products-section" class="py-5 bg-dark text-light" style="background-color: transparent !important;">
     <div class="container">
         <h2 class="text-center mb-5 display-4 font-weight-bold text-success">منتجاتنا المميزة</h2>
         
@@ -176,7 +176,7 @@
 <!-- نهاية قسم المنتجات -->
 
 <!-- قسم العروض -->
-<section id="offers" class="py-5 bg-dark text-light">
+<section id="offers" class="py-5 bg-dark text-light" style="background-color: transparent !important;">
     <div class="container">
         <!-- عنوان القسم -->
         <h2 class="text-center text-success mb-5">عروضنا الخاصة</h2>
@@ -317,7 +317,7 @@
 <!-- قسم "آراء العملاء" الاحترافي مع إمكانية الإعجاب والتعليق -->
 <section class="customer-reviews py-5 text-light" style="background-color: #162821;">
     <div class="container">
-        <h2 class="text-center text-success fw-bold mb-4">آراء عملائنا</h2>
+        <h2 class="text-center text-success fw-bold mb-4" >آراء عملائنا</h2>
         
 <!-- إحصائيات العملاء -->
 <div class="text-center mb-4">
@@ -824,6 +824,11 @@
         </div>
     </div>
 </section>
+
+<div class="scroll-buttons">
+    <button onclick="scrollToTop()" class="up">⬆</button>
+    <button onclick="scrollToBottom()" class="down">⬇</button>
+</div>
     </main>
 
     <!-- الفوتر -->
@@ -888,7 +893,7 @@
             </div>
         </div>
     </div>
-        <div class="cerator-footer">Made by Mahmoud Hamed &copy; 2025</div>
+    <div class="cerator-footer">Made by Mahmoud Hamed &copy; 2025</div>
 </footer>
 
     <!-- ربط مكتبة البوتستراب -->
