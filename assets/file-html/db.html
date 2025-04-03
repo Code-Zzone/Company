@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قائمة العملاء والطلبات</title>
+  <!-- تحميل Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+        direction: rtl;
+    }
+    /* إضافة لودر */
+    #loading {
+      display: none;
+      text-align: center;
+      font-size: 24px;
+      margin-top: 50px;
+    }
+    /* تحسين مظهر البحث */
+    .search-container {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <h1 class="text-center mb-4">قائمة العملاء والطلبات</h1>
+
+    <!-- محرك البحث -->
+    <div class="search-container">
+      <input type="text" id="search-input" class="form-control" placeholder="ابحث بالاسم أو بالرقم التعريفي...">
+    </div>
+
+    <div id="loading">جاري تحميل البيانات...</div>
+    <div id="customers" class="row"></div>
+  </div>
+
+  <!-- تحميل Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <script type="module">
+    // إعداد Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBJkpqCGBRITqc66TQtkdQ_Rj0Jwd5uhZI",
+      authDomain: "company-23271.firebaseapp.com",
+      databaseURL: "https://company-23271-default-rtdb.firebaseio.com",
+      projectId: "company-23271",
+      storageBucket: "company-23271.firebasestorage.app",
+      messagingSenderId: "48019146673",
+      appId: "1:48019146673:web:b4f7bc91bb169c43b29f90"
+    };
+
+    // تهيئة Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const customersRef = db.ref("customers");
+
+    // إظهار اللودر أثناء تحميل البيانات
+    document.getElementById('loading').style.display = 'block';
+
+    let customersData = [];
+
+    // الحصول على بيانات العملاء
+    customersRef.on('child_added', snapshot => {
+      const customer = snapshot.val();
+      const customerId = snapshot.key;
+
+      // إضافة المعرف الفريد للعملية (من 00001 إلى 99999)
+      const processId = ("00000" + (parseInt(customerId) + 1)).slice(-5);
+
+      // إنشاء بطاقة العميل
+      const customerCard = document.createElement('div');
+      customerCard.className = 'col-12 col-md-4 col-lg-3 mb-4 customer-card';
+      customerCard.setAttribute('data-id', customerId);  // إضافة المعرف للبحث
+      customerCard.innerHTML = `
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">${customer.name}</h5>
+            <p class="card-text"><strong>معرف العملية:</strong> ${processId}</p>
+            <p class="card-text"><strong>العنوان:</strong> ${customer.address}</p>
+            <p class="card-text"><strong>رقم الهاتف:</strong> ${customer.phone}</p>
+            ${customer.altPhone ? `<p class="card-text"><strong>رقم الهاتف الآخر:</strong> ${customer.altPhone}</p>` : ''}
+            <p class="card-text"><strong>البريد الإلكتروني:</strong> ${customer.email}</p>
+            <p class="card-text"><strong>التاريخ:</strong> ${new Date(customer.timestamp).toLocaleDateString()}</p>
+            <p class="card-text"><strong>الإجمالي:</strong> ${customer.totalAmount} جنيه</p>
+            
+            <a class="btn btn-info" data-bs-toggle="collapse" href="#orders-${customerId}" role="button" aria-expanded="false" aria-controls="orders-${customerId}">
+              عرض الطلبات
+            </a>
+
+            <div class="collapse" id="orders-${customerId}">
+              <div class="card card-body mt-3">
+                <ul class="list-group">
+                  ${Object.keys(customer.order).map(orderId => {
+                    const order = customer.order[orderId];
+                    return `
+                      <li class="list-group-item">
+                        <strong>${order.name}</strong>
+                        <p>الكمية: ${order.quantity}</p>
+                        <p>السعر: ${order.price} جنيه</p>
+                        <p>الإجمالي: ${order.total} جنيه</p>
+                      </li>
+                    `;
+                  }).join('')}
+                </ul>
+              </div>
+            </div>
+            <a class="btn btn-primary mt-3" href="invoice.html?customerId=${customerId}" target="_blank">إنشاء الفاتورة</a>
+          </div>
+        </div>
+      `;
+      
+      // إضافة بطاقة العميل إلى الصفحة
+      document.getElementById('customers').appendChild(customerCard);
+
+      // حفظ بيانات العميل في مصفوفة للعمل بها لاحقًا
+      customersData.push({ id: customerId, card: customerCard });
+
+      // إخفاء اللودر عند الانتهاء من تحميل البيانات
+      document.getElementById('loading').style.display = 'none';
+    });
+
+    // محرك البحث
+    document.getElementById('search-input').addEventListener('input', function() {
+      const query = this.value.toLowerCase();
+
+      customersData.forEach(customer => {
+        const name = customer.card.querySelector('.card-title').textContent.toLowerCase();
+        const processId = customer.card.querySelector('.card-text').textContent.toLowerCase();
+        
+        if (name.includes(query) || processId.includes(query)) {
+          customer.card.style.display = 'block';
+        } else {
+          customer.card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+  <!-- تحميل JavaScript الخاص بـ Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
