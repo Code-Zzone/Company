@@ -41,21 +41,21 @@ function scrollToBottom() {
 
 
 
-   // وظيفة تفعيل وضع ملء الشاشة
-        function enterFullScreen() {
-            let docElement = document.documentElement;
-            if (docElement.requestFullscreen) {
-                docElement.requestFullscreen();
-            } else if (docElement.mozRequestFullScreen) { // Firefox
-                docElement.mozRequestFullScreen();
-            } else if (docElement.webkitRequestFullscreen) { // Chrome, Safari
-                docElement.webkitRequestFullscreen();
-            } else if (docElement.msRequestFullscreen) { // IE/Edge
-                docElement.msRequestFullscreen();
-            }
-        }
+   // // وظيفة تفعيل وضع ملء الشاشة
+   //      function enterFullScreen() {
+   //          let docElement = document.documentElement;
+   //          if (docElement.requestFullscreen) {
+   //              docElement.requestFullscreen();
+   //          } else if (docElement.mozRequestFullScreen) { // Firefox
+   //              docElement.mozRequestFullScreen();
+   //          } else if (docElement.webkitRequestFullscreen) { // Chrome, Safari
+   //              docElement.webkitRequestFullscreen();
+   //          } else if (docElement.msRequestFullscreen) { // IE/Edge
+   //              docElement.msRequestFullscreen();
+   //          }
+   //      }
 
-        // تفعيل وضع ملء الشاشة عند أي نقرة في الصفحة
-        document.body.addEventListener("click", function() {
-            enterFullScreen();
-        });
+   //      // تفعيل وضع ملء الشاشة عند أي نقرة في الصفحة
+   //      document.body.addEventListener("click", function() {
+   //          enterFullScreen();
+   //      });
