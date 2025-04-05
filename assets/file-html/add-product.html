@@ -9,6 +9,17 @@
   <style>
     body { direction: rtl; padding: 30px; }
     .form-container { max-width: 500px; margin: auto; }
+    #loader {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .spinner-border {
+      width: 3rem;
+      height: 3rem;
+    }
+
   </style>
 </head>
 <body>
@@ -25,80 +36,75 @@
     </div>
     <div class="mb-3">
       <label class="form-label">رابط الصورة</label>
-      <input type="text" id="product-image" class="form-control">
+      <input type="text" id="product-image" class="form-control" placeholder="../images/image1.png">
+      <p style="opacity: 0.2;">../images/image1.png</p>
     </div>
     <button class="btn btn-primary w-100" onclick="addProduct()">إضافة المنتج</button>
     <div id="message" class="mt-3 text-center"></div>
+  </div>
+  
+  <hr class="my-5">
+  <h3 class="text-center mb-3">قائمة المنتجات</h3>
+
+  <div class="mb-3">
+    <input type="text" id="search-input" class="form-control" placeholder="ابحث باسم المنتج...">
+  </div>
+
+  <!-- loader start -->
+  <div id="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">جاري التحميل...</span>
+    </div>
+    <p>جاري تحميل المنتجات...</p>
+  </div>
+
+  <!-- رسالة حذف المنتج -->
+  <div id="delete-message-container" class="mt-3 text-center" style="display: none;">
+    <div class="alert alert-info"></div>
+  </div>
+
+  <!-- نموذج كلمة السر قبل الحذف -->
+  <div id="password-container" style="display: none; text-align: center;">
+    <div class="mb-3">
+      <label for="password" class="form-label">أدخل كلمة السر لحذف المنتج:</label>
+      <input type="password" id="password" class="form-control" placeholder="أدخل كلمة السر">
+    </div>
+    <button class="btn btn-danger" onclick="verifyPassword()">حذف المنتج</button>
+    <button class="btn btn-secondary" onclick="cancelDelete()">إلغاء</button>
+    <div id="password-message" class="mt-3" style="color: red; display: none;"></div>
+  </div>
+
+
+  <!-- عرض عدد المنتجات فوق الجدول -->
+<div id="products-count" class="text-center mb-3">
+  <h5>عدد المنتجات: <span id="product-count-value">0</span></h5>
+</div>
+
+
+  <div class="table-responsive">
+    <table class="table table-bordered text-center align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>المعرف</th>
+          <th>اسم المنتج</th>
+          <th>السعر</th>
+          <th>الصورة</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody id="products-table-body">
+        <!-- هنا هنضيف المنتجات -->
+      </tbody>
+    </table>
   </div>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBJkpqCGBRITqc66TQtkdQ_Rj0Jwd5uhZI",
-      authDomain: "company-23271.firebaseapp.com",
-      databaseURL: "https://company-23271-default-rtdb.firebaseio.com",
-      projectId: "company-23271",
-      storageBucket: "company-23271.firebasestorage.app",
-      messagingSenderId: "48019146673",
-      appId: "1:48019146673:web:b4f7bc91bb169c43b29f90"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-    const productsRef = db.ref("products");
-
-    // الحصول على الآي دي التالي من آخر منتج
-    async function getNextProductId() {
-      const snapshot = await productsRef.once('value');
-      const products = snapshot.val();
-      let maxId = 200; // نبدأ من 201
-      if (products) {
-        Object.keys(products).forEach(key => {
-          const id = parseInt(key, 10);
-          if (id > maxId) maxId = id;
-        });
-      }
-      return maxId + 1;
-    }
-
-    function showMessage(msg, color = "green") {
-      const msgDiv = document.getElementById("message");
-      msgDiv.style.color = color;
-      msgDiv.innerText = msg;
-    }
-
-    async function addProduct() {
-      const name = document.getElementById("product-name").value.trim();
-      const price = parseFloat(document.getElementById("product-price").value);
-      const image = document.getElementById("product-image").value.trim();
-
-      if (!name || isNaN(price) || !image) {
-        showMessage("يرجى إدخال جميع البيانات بشكل صحيح.", "red");
-        return;
-      }
-
-      const newId = await getNextProductId();
-
-      const newProduct = {
-        name,
-        price,
-        image
-      };
-
-      db.ref("products/" + newId).set(newProduct, error => {
-        if (error) {
-          showMessage("حدث خطأ أثناء الحفظ.", "red");
-        } else {
-          showMessage("تم إضافة المنتج بنجاح ✅");
-          document.getElementById("product-name").value = "";
-          document.getElementById("product-price").value = "";
-          document.getElementById("product-image").value = "";
-        }
-      });
-    }
+  <script src="../js/addProduct.js">
+   
   </script>
+
 </body>
 </html>
